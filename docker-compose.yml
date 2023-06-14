@@ -1,39 +1,52 @@
 version: '3'
+
 services:
   frontend:
     build:
-      context: ./app
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend_container
     ports:
-      - 80:80
-    depends_on:
-      - backend
+      - "80:80"
     networks:
       - app-network
-
-  backend:
-    build:
-      context: ./api
-    ports:
-      - 8080:80
-    depends_on:
-      - db
-    networks:
-      - app-network
-
-  db:
-    image: mysql:5.7
+    # depends_on:
+    #   - backend
     environment:
-      - MYSQL_ROOT_PASSWORD=mysecretpassword
-      - MYSQL_DATABASE=appdb
-      - MYSQL_USER=appuser
-      - MYSQL_PASSWORD=apppassword
-    volumes:
-      - db-data:/var/lib/mysql
-    networks:
-      - app-network
+      - VUE_APP_API_URL=http://api.loc
+
+#   backend:
+#     build:
+#       context: ./backend
+#       dockerfile: Dockerfile
+#     container_name: backend_container
+#     ports:
+#       - "9000:9000"
+#     networks:
+#       - app-network
+#     environment:
+#       - MYSQL_HOST=mysql
+#       - MYSQL_DATABASE=your_database
+#       - MYSQL_USER=your_user
+#       - MYSQL_PASSWORD=your_password
+#       - MYSQL_ROOT_PASSWORD=your_root_password
+
+#   mysql:
+#     image: mysql:latest
+#     container_name: mysql_container
+#     environment:
+#       - MYSQL_ROOT_PASSWORD=your_root_password
+#       - MYSQL_DATABASE=your_database
+#       - MYSQL_USER=your_user
+#       - MYSQL_PASSWORD=your_password
+#     volumes:
+#       - mysql_data:/var/lib/mysql
+#     networks:
+#       - app-network
 
 networks:
   app-network:
 
-volumes:
-  db-data:
+# volumes:
+#   mysql_data:
+
