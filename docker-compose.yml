@@ -31,6 +31,19 @@ services:
       - MYSQL_PASSWORD=your_password
       - MYSQL_ROOT_PASSWORD=your_root_password
 
+  web:
+    image: nginx
+    container_name: nginx_container
+    volumes:
+      - ./templates:/etc/nginx/templates
+    ports:
+      - "8080:80"
+    networks:
+      - app-network
+    environment:
+      - NGINX_HOST=foobar.com
+      - NGINX_PORT=80
+
   mysql:
     image: mysql:latest
     platform: linux/x86_64
