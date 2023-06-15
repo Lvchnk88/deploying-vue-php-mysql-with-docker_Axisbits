@@ -10,43 +10,43 @@ services:
       - "80:80"
     networks:
       - app-network
-    # depends_on:
-    #   - backend
+    depends_on:
+      - backend
     environment:
       - VUE_APP_API_URL=http://api.loc
 
-#   backend:
-#     build:
-#       context: ./backend
-#       dockerfile: Dockerfile
-#     container_name: backend_container
-#     ports:
-#       - "9000:9000"
-#     networks:
-#       - app-network
-#     environment:
-#       - MYSQL_HOST=mysql
-#       - MYSQL_DATABASE=your_database
-#       - MYSQL_USER=your_user
-#       - MYSQL_PASSWORD=your_password
-#       - MYSQL_ROOT_PASSWORD=your_root_password
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend_container
+    ports:
+      - "9000:9000"
+    networks:
+      - app-network
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_DATABASE=your_database
+      - MYSQL_USER=your_user
+      - MYSQL_PASSWORD=your_password
+      - MYSQL_ROOT_PASSWORD=your_root_password
 
-#   mysql:
-#     image: mysql:latest
-#     container_name: mysql_container
-#     environment:
-#       - MYSQL_ROOT_PASSWORD=your_root_password
-#       - MYSQL_DATABASE=your_database
-#       - MYSQL_USER=your_user
-#       - MYSQL_PASSWORD=your_password
-#     volumes:
-#       - mysql_data:/var/lib/mysql
-#     networks:
-#       - app-network
+  mysql:
+    image: mysql:latest
+    platform: linux/x86_64
+    container_name: mysql_container
+    environment:
+      - MYSQL_ROOT_PASSWORD=your_root_password
+      - MYSQL_DATABASE=your_database
+      - MYSQL_USER=your_user
+      - MYSQL_PASSWORD=your_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - app-network
 
 networks:
   app-network:
 
-# volumes:
-#   mysql_data:
-
+volumes:
+   mysql_data:
