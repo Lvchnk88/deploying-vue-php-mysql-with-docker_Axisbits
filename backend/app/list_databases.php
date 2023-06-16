@@ -12,7 +12,12 @@ $query = "SHOW DATABASES";
 $statement = $pdo->query($query);
 $databases = $statement->fetchAll(PDO::FETCH_COLUMN);
 
-$response = json_encode($databases);
+$response = ['Databases' => $databases];
+$jsonResponse = json_encode($response);
+
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET');
+header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
 
 header('Content-Type: application/json');
-echo $response;
+echo $jsonResponse;
