@@ -1,22 +1,12 @@
 # vue php and mysql project setup
 
-## Frontend Project setup (only for Sergiy)
-
-This will generate default vue project with basic hello world application.
+### Make frontend and backend app accessible with URL
 ```
-cd frontend 
-npm install
-npm run serve
+sudo bash -c 'echo 127.0.0.1 app.loc >> /etc/hosts && echo 127.0.0.1 api.app.loc >> /etc/hosts'
+
 ```
 
-### Make frontend and backend app accessible on the name
-
-echo "127.0.0.1   app.loc" | sudo tee -a /etc/hosts
-echo "127.0.0.1   api.app.loc" | sudo tee -a /etc/hosts
-
-
-
-### Run Frontend as Docker container 
+### Run Progect as Docker container 
 ```
 cd {{ project }}
 docker-compose up --build -d
